@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "blog_tags",
+  "info": {
+    "singularName": "blog-tag",
+    "pluralName": "blog-tags",
+    "displayName": "Blog tags"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "tag_name": {
+      "type": "string",
+      "required": true
+    },
+    "tag_slug": {
+      "type": "uid",
+      "targetField": "tag_name",
+      "required": true
+    },
+    "blog_articles": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::blog-article.blog-article",
+      "mappedBy": "blog_tags"
+    }
+  }
+}
