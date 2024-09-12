@@ -362,92 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiBlogArticleBlogArticle extends Schema.CollectionType {
-  collectionName: 'blog_articles';
-  info: {
-    singularName: 'blog-article';
-    pluralName: 'blog-articles';
-    displayName: 'blog articles';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    article_title: Attribute.String & Attribute.Required;
-    article_slug: Attribute.UID<
-      'api::blog-article.blog-article',
-      'article_title'
-    > &
-      Attribute.Required;
-    article_content: Attribute.Blocks & Attribute.Required;
-    article_excerpt: Attribute.String & Attribute.Required;
-    article_author: Attribute.Enumeration<['Zayd Inani']> &
-      Attribute.Required &
-      Attribute.DefaultTo<'Zayd Inani'>;
-    article_cover_image: Attribute.Media<'images'> & Attribute.Required;
-    blog_tags: Attribute.Relation<
-      'api::blog-article.blog-article',
-      'manyToMany',
-      'api::blog-tag.blog-tag'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::blog-article.blog-article',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::blog-article.blog-article',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiBlogTagBlogTag extends Schema.CollectionType {
-  collectionName: 'blog_tags';
-  info: {
-    singularName: 'blog-tag';
-    pluralName: 'blog-tags';
-    displayName: 'Blog tags';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    tag_name: Attribute.String & Attribute.Required;
-    tag_slug: Attribute.UID<'api::blog-tag.blog-tag', 'tag_name'> &
-      Attribute.Required;
-    blog_articles: Attribute.Relation<
-      'api::blog-tag.blog-tag',
-      'manyToMany',
-      'api::blog-article.blog-article'
-    >;
-    tag_icon: Attribute.Media<'images'> & Attribute.Required;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::blog-tag.blog-tag',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::blog-tag.blog-tag',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -874,6 +788,134 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiBlogArticleBlogArticle extends Schema.CollectionType {
+  collectionName: 'blog_articles';
+  info: {
+    singularName: 'blog-article';
+    pluralName: 'blog-articles';
+    displayName: 'blog articles';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    article_title: Attribute.String & Attribute.Required;
+    article_slug: Attribute.UID<
+      'api::blog-article.blog-article',
+      'article_title'
+    > &
+      Attribute.Required;
+    article_content: Attribute.Blocks & Attribute.Required;
+    article_excerpt: Attribute.String & Attribute.Required;
+    article_author: Attribute.Enumeration<['Zayd Inani']> &
+      Attribute.Required &
+      Attribute.DefaultTo<'Zayd Inani'>;
+    article_cover_image: Attribute.Media<'images'> & Attribute.Required;
+    blog_tags: Attribute.Relation<
+      'api::blog-article.blog-article',
+      'manyToMany',
+      'api::blog-tag.blog-tag'
+    >;
+    blog_genres: Attribute.Relation<
+      'api::blog-article.blog-article',
+      'manyToMany',
+      'api::blog-genre.blog-genre'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::blog-article.blog-article',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::blog-article.blog-article',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiBlogGenreBlogGenre extends Schema.CollectionType {
+  collectionName: 'blog_genres';
+  info: {
+    singularName: 'blog-genre';
+    pluralName: 'blog-genres';
+    displayName: 'Blog genres';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    genre_name: Attribute.String;
+    genre_slug: Attribute.UID<'api::blog-genre.blog-genre', 'genre_name'>;
+    blog_articles: Attribute.Relation<
+      'api::blog-genre.blog-genre',
+      'manyToMany',
+      'api::blog-article.blog-article'
+    >;
+    genre_icon: Attribute.Media<'images'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::blog-genre.blog-genre',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::blog-genre.blog-genre',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiBlogTagBlogTag extends Schema.CollectionType {
+  collectionName: 'blog_tags';
+  info: {
+    singularName: 'blog-tag';
+    pluralName: 'blog-tags';
+    displayName: 'Blog tags';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    tag_name: Attribute.String & Attribute.Required;
+    tag_slug: Attribute.UID<'api::blog-tag.blog-tag', 'tag_name'> &
+      Attribute.Required;
+    blog_articles: Attribute.Relation<
+      'api::blog-tag.blog-tag',
+      'manyToMany',
+      'api::blog-article.blog-article'
+    >;
+    tag_icon: Attribute.Media<'images'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::blog-tag.blog-tag',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::blog-tag.blog-tag',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -884,8 +926,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::blog-article.blog-article': ApiBlogArticleBlogArticle;
-      'api::blog-tag.blog-tag': ApiBlogTagBlogTag;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -894,6 +934,9 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::blog-article.blog-article': ApiBlogArticleBlogArticle;
+      'api::blog-genre.blog-genre': ApiBlogGenreBlogGenre;
+      'api::blog-tag.blog-tag': ApiBlogTagBlogTag;
     }
   }
 }

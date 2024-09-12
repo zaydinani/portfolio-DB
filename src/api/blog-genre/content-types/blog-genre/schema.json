@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "blog_genres",
+  "info": {
+    "singularName": "blog-genre",
+    "pluralName": "blog-genres",
+    "displayName": "Blog genres"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "genre_name": {
+      "type": "string"
+    },
+    "genre_slug": {
+      "type": "uid",
+      "targetField": "genre_name"
+    },
+    "blog_articles": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::blog-article.blog-article",
+      "inversedBy": "blog_genres"
+    },
+    "genre_icon": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}

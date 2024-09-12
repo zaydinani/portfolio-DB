@@ -50,6 +50,12 @@
       "relation": "manyToMany",
       "target": "api::blog-tag.blog-tag",
       "inversedBy": "blog_articles"
+    },
+    "blog_genres": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::blog-genre.blog-genre",
+      "mappedBy": "blog_articles"
     }
   }
 }
