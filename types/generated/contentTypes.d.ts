@@ -897,7 +897,6 @@ export interface ApiBlogTagBlogTag extends Schema.CollectionType {
       'manyToMany',
       'api::blog-article.blog-article'
     >;
-    tag_icon: Attribute.Media<'images'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

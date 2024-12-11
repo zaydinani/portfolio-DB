@@ -26,14 +26,6 @@
       "relation": "manyToMany",
       "target": "api::blog-article.blog-article",
       "mappedBy": "blog_tags"
-    },
-    "tag_icon": {
-      "allowedTypes": [
-        "images"
-      ],
-      "type": "media",
-      "multiple": false,
-      "required": true
     }
   }
 }
